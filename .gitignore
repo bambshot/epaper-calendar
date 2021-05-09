@@ -1,0 +1,9 @@
+__pycache__/
+
+.venv
+.vscode
+
+# secret info
+.env
+credentials.json
+token.json
