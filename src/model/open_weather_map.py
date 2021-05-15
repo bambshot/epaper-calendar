@@ -13,15 +13,16 @@ from env import OWM_API_KEY
 
 
 class OpenWeatherMap:
-    def __init__(self, input_payload):
-        url = "https://api.openweathermap.org/data/2.5/onecall/timemachine"
+    def __init__(self):
+        self.url = "https://api.openweathermap.org/data/2.5/onecall"
 
-        now = str(int(time.time()))
+    def get_temperature(self, input_payload):
         payload = {
-            "dt": now,
+            "lang": "ja",
             "units": "metric",
             "appid": OWM_API_KEY,
         }
         payload.update(input_payload)
+        response = requests.get(self.url, params=payload).json()
 
-        self.response = requests.get(url, params=payload).json()
+        return str(response["current"]["temp"])

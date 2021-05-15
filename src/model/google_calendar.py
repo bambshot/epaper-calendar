@@ -10,23 +10,20 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 
 
+def get_dirpath_project_root(name):
+    return os.path.join(
+        os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
+        name,
+    )
+
+
 class GoogleCalendar:
     def __init__(self):
         self.scopes = ["https://www.googleapis.com/auth/calendar.readonly"]
         creds = None
 
-        token_path = os.path.join(
-            os.path.dirname(
-                os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-            ),
-            "token.json",
-        )
-        cred_path = os.path.join(
-            os.path.dirname(
-                os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-            ),
-            "credentials.json",
-        )
+        token_path = get_dirpath_project_root("token.json")
+        cred_path = get_dirpath_project_root("credentials.json")
 
         if os.path.exists(token_path):
             creds = Credentials.from_authorized_user_file(token_path, self.scopes)

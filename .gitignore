@@ -3,7 +3,9 @@ __pycache__/
 .venv
 .vscode
 
-# secret info
+# SECRET INFO
+## OPEN WEATHER MAP API KEY
 .env
+## GOOGLE OAUTH INFO
 credentials.json
 token.json
