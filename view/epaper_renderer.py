@@ -13,11 +13,11 @@ class EpaperRenderer:
     def template(self, data):
         fonts = {
             "default": os.path.join(
-                os.path.realpath(__file__),
+                os.path.dirname(os.path.realpath(__file__)),
                 "assets", "GLT-GonunneObsolete.otf"
             ),
             "hiragana_number": os.path.join(
-                os.path.realpath(__file__),
+                os.path.dirname(os.path.realpath(__file__)),
                 "assets", "GLT-GonunneSpurious.otf"
             ),
         }
