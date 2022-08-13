@@ -4,8 +4,8 @@ from datetime import datetime
 import locale
 import logging
 
-from env import GOOGLE_CALENDAR_API_KEY
-from env import OWM_API_KEY
+from google.auth import load_credentials_from_file
+from env import GOOGLE_CALENDAR_ID, OWM_API_KEY
 from model.google_calendar import GoogleCalendar
 from model.open_weather_map import OpenWeatherMap
 from view.epaper_renderer import EpaperRenderer
@@ -21,9 +21,11 @@ def main():
     weather = OpenWeatherMap(OWM_API_KEY)
     daily_forcast = weather.get_daily_forecast({"lat": "35.71", "lon": "139.81"})
 
-    calendar = GoogleCalendar()
+    scopes = ["https://www.googleapis.com/auth/calendar.readonly"]
+    cred = load_credentials_from_file("service-account.json", scopes)[0]
+    calendar = GoogleCalendar(cred)
     events = []
-    for event in calendar.get_events(calendar_id="primary", max_results=5):
+    for event in calendar.get_events(calendar_id=GOOGLE_CALENDAR_ID, max_results=5):
         events.append(
             {
                 "period": event["period"],

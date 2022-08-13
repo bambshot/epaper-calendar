@@ -5,9 +5,6 @@ from __future__ import print_function
 from datetime import datetime
 import os.path
 from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
 
 
 def get_dirpath_project_root(name):
@@ -18,29 +15,13 @@ def get_dirpath_project_root(name):
 
 
 class GoogleCalendar:
-    def __init__(self):
-        scopes = ["https://www.googleapis.com/auth/calendar.readonly"]
-        creds = None
-
-        token_path = get_dirpath_project_root("token.json")
-        cred_path = get_dirpath_project_root("credentials.json")
-
-        if os.path.exists(token_path):
-            creds = Credentials.from_authorized_user_file(token_path, scopes)
-        if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(cred_path, scopes)
-                creds = flow.run_local_server(port=0)
-            with open(token_path, "w") as token:
-                token.write(creds.to_json())
-
-        self.service = build("calendar", "v3", credentials=creds)
+    def __init__(self, cred):
+        self.service = build("calendar", "v3", credentials=cred)
 
     def get_events(self, calendar_id, max_results):
         now = datetime.utcnow().isoformat() + "Z"
         events_result = (
+            # pylint: disable=maybe-no-member
             self.service.events()
             .list(
                 calendarId=calendar_id,
@@ -84,7 +65,8 @@ class GoogleCalendar:
 
         if start["date_str"] == end["date_str"]:
             return f'{start["date_str"]} {start["time_str"]}-{end["time_str"]}'
-        elif start["time_str"] == "0000" and end["time_str"] == "0000":
+
+        if start["time_str"] == "0000" and end["time_str"] == "0000":
             return f'{start["date_str"]}-{end["date_str"]}'
-        else:
-            return f'{start["date_str"]} {start["time_str"]}-{end["date_str"]} {end["time_str"]}'
+
+        return f'{start["date_str"]} {start["time_str"]}-{end["date_str"]} {end["time_str"]}'
