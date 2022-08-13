@@ -3,6 +3,10 @@ __pycache__/
 .venv
 .vscode
 
+# FONT FILES
+view/assets/GLT-GonunneSpurious.otf
+view/assets/GLT-GonunneObsolete.otf
+
 # SECRET INFO
 ## OPEN WEATHER MAP API KEY
 .env
