@@ -27,6 +27,8 @@
 # THE SOFTWARE.
 #
 
+# https://github.com/waveshare/e-Paper/blob/979184d047ee2d43b9f364f2cff00eb5764113e1/RaspberryPi_JetsonNano/python/lib/waveshare_epd/epdconfig.py
+
 import os
 import logging
 import sys
