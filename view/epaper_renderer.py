@@ -4,12 +4,11 @@
 import os
 
 from PIL import Image, ImageDraw, ImageFont
-from waveshare_epd.epd7in5_V2 import EPD
 
 
 class EpaperRenderer:
-    def __init__(self):
-        self.epd = EPD()
+    def __init__(self, epd):
+        self.epd = epd
 
     def template(self, data):
         fonts = {

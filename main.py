@@ -6,6 +6,7 @@ import logging
 
 from google.auth import load_credentials_from_file
 from env import GOOGLE_CALENDAR_ID, OWM_API_KEY
+from lib.waveshare_epd.epd7in5_V2 import EPD
 from model.google_calendar import GoogleCalendar
 from model.open_weather_map import OpenWeatherMap
 from view.epaper_renderer import EpaperRenderer
@@ -33,7 +34,7 @@ def main():
             }
         )
 
-    renderer = EpaperRenderer()
+    renderer = EpaperRenderer(EPD())
     renderer.render(
         {
             "date": date_str,
