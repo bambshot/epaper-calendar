@@ -13,7 +13,6 @@ numpy==1.20.2
 oauthlib==3.1.0
 packaging==20.9
 Pillow==8.2.0
-pkg-resources==0.0.0
 protobuf==3.16.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
