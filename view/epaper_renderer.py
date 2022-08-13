@@ -2,20 +2,8 @@
 # -*- coding:utf-8 -*-
 
 import os
-import sys
 
 from PIL import Image, ImageDraw, ImageFont
-
-
-def get_dirpath_project_root(name):
-    return os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))),
-        name,
-    )
-
-
-lib_dir = get_dirpath_project_root("lib")
-sys.path.append(lib_dir)
 from waveshare_epd.epd7in5_V2 import EPD
 
 
@@ -24,10 +12,15 @@ class EpaperRenderer:
         self.epd = EPD()
 
     def template(self, data):
-        assets_dir = get_dirpath_project_root("assets")
         fonts = {
-            "default": os.path.join(assets_dir, "GLT-GonunneObsolete.otf"),
-            "hiragana_number": os.path.join(assets_dir, "GLT-GonunneSpurious.otf"),
+            "default": os.path.join(
+                os.path.realpath(__file__),
+                "assets", "GLT-GonunneObsolete.otf"
+            ),
+            "hiragana_number": os.path.join(
+                os.path.realpath(__file__),
+                "assets", "GLT-GonunneSpurious.otf"
+            ),
         }
 
         image = Image.new("1", (self.epd.width, self.epd.height), 255)
