@@ -3,15 +3,7 @@
 
 from __future__ import print_function
 from datetime import datetime
-import os.path
 from googleapiclient.discovery import build
-
-
-def get_dirpath_project_root(name):
-    return os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))),
-        name,
-    )
 
 
 class GoogleCalendar:
