@@ -6,19 +6,16 @@ import os
 
 import requests
 
-env_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-sys.path.append(env_path)
-from env import OWM_API_KEY
-
 
 class OpenWeatherMap:
-    def __init__(self):
+    def __init__(self, api_key):
         self.url = "https://api.openweathermap.org/data/2.5/onecall"
+        self.apikey = api_key
 
     def get_daily_forecast(self, input_payload):
         payload = {
             "units": "metric",
-            "appid": OWM_API_KEY,
+            "appid": self.apikey,
             "exclude": "current,minutely,hourly,alerts",
         }
         payload.update(input_payload)

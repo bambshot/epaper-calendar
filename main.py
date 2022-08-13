@@ -4,6 +4,8 @@ from datetime import datetime
 import locale
 import logging
 
+from env import GOOGLE_CALENDAR_API_KEY
+from env import OWM_API_KEY
 from model.google_calendar import GoogleCalendar
 from model.open_weather_map import OpenWeatherMap
 from view.epaper_renderer import EpaperRenderer
@@ -16,7 +18,7 @@ def main():
     date_str = now.strftime("%Y.%m.%d")
     day_of_week_str = now.strftime("%a")
 
-    weather = OpenWeatherMap()
+    weather = OpenWeatherMap(OWM_API_KEY)
     daily_forcast = weather.get_daily_forecast({"lat": "35.71", "lon": "139.81"})
 
     calendar = GoogleCalendar()
