@@ -30,7 +30,7 @@ class EpaperRenderer:
         day_of_the_week_font = ImageFont.truetype(fonts["default"], 80)
         draw.text((25, 0), data["date"], font=date_font, fill=0)
         draw.text(
-            (410, 5), f'[{data["day_of_week"]}]', font=day_of_the_week_font, fill=0
+            (425, 5), f'[{data["day_of_week"]}]', font=day_of_the_week_font, fill=0
         )
         draw.line((25, 110, 775, 110), fill=0, width=3)
 
